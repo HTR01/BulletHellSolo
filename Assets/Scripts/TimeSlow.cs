@@ -1,0 +1,49 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TimeSlow : MonoBehaviour
+{
+    bool timeSlowed = false;
+    public float slowTimer = 100;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (timeSlowed == false)
+            {
+                SlowTime();
+            }
+            else
+            {
+                NormalTime();
+            }
+        }
+        if(timeSlowed == true)
+        {
+            slowTimer -= 0.3f;
+            if(slowTimer <= 0)
+            {
+                NormalTime();
+            }
+        }
+        else if(slowTimer < 100)
+        {
+            slowTimer += 0.3f;
+        }
+        Debug.Log(slowTimer);
+    }
+
+    void SlowTime()
+    {
+        Time.timeScale = 0.5f;
+        timeSlowed = true;
+    }
+
+    void NormalTime()
+    {
+        Time.timeScale = 1;
+        timeSlowed = false;
+    }
+}
