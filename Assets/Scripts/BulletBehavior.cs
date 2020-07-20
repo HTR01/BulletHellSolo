@@ -5,6 +5,8 @@ using UnityEngine;
 public class BulletBehavior : MonoBehaviour
 {
     float speed = 15;
+    float baseSpeed = 15;
+    float timeSpeed = 30;
 
     void Update()
     {
@@ -12,6 +14,14 @@ public class BulletBehavior : MonoBehaviour
         if (transform.parent == true)
         {
             transform.parent = null;
+        }
+        if(TimeSlow.timeSlowed == true)
+        {
+            speed = timeSpeed;
+        }
+        else
+        {
+            speed = baseSpeed;
         }
     }
 }
