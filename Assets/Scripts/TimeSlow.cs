@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeSlow : MonoBehaviour
 {
     bool timeSlowed = false;
     public float slowTimer = 100;
+    public Image cooldown;
 
     void Update()
     {
@@ -33,6 +35,8 @@ public class TimeSlow : MonoBehaviour
             slowTimer += 0.3f;
         }
         Debug.Log(slowTimer);
+
+        cooldown.fillAmount = slowTimer / 100;
     }
 
     void SlowTime()
