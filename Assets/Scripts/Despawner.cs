@@ -6,6 +6,9 @@ public class Despawner : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

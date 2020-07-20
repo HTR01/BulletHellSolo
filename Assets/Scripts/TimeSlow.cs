@@ -34,7 +34,6 @@ public class TimeSlow : MonoBehaviour
         {
             slowTimer += 0.3f;
         }
-        Debug.Log(slowTimer);
 
         cooldown.fillAmount = slowTimer / 100;
     }
