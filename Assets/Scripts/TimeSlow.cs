@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TimeSlow : MonoBehaviour
 {
-    bool timeSlowed = false;
+    public static bool timeSlowed = false;
     public float slowTimer = 100;
     public Image cooldown;
 

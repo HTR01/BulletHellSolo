@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 10;
     public float baseSpeed = 10;
     public float grazeSpeed = 5;
+    public float timeSlowSpeed = 20;
 
     void Start()
     {
@@ -34,7 +35,18 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed = grazeSpeed;
+            if (TimeSlow.timeSlowed == true)
+            {
+                speed = grazeSpeed * 2;
+            }
+            else
+            {
+                speed = grazeSpeed;
+            }
+        }
+        else if(TimeSlow.timeSlowed == true)
+        {
+            speed = timeSlowSpeed;
         }
         else
         {

@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 277614844}
   - component: {fileID: 277614848}
   - component: {fileID: 277614849}
+  - component: {fileID: 277614850}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -320,6 +321,7 @@ MonoBehaviour:
   speed: 10
   baseSpeed: 10
   grazeSpeed: 5
+  timeSlowSpeed: 20
 --- !u!114 &277614849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +336,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowTimer: 100
   cooldown: {fileID: 1765276263}
+--- !u!114 &277614850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277614843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef98ace7f418514291f00cef9345458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 8750834076074471802, guid: b2390e41c9463ed48b2a90bf4207a331, type: 3}
+  player: {fileID: 277614847}
 --- !u!1 &1142957662
 GameObject:
   m_ObjectHideFlags: 0
