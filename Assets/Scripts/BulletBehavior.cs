@@ -24,4 +24,16 @@ public class BulletBehavior : MonoBehaviour
             speed = baseSpeed;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(this.gameObject);
+        }
+        if (other.gameObject.CompareTag("Despawn"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }

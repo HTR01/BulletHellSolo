@@ -9,9 +9,14 @@ public class PlayerMovement : MonoBehaviour
     public float grazeSpeed = 5;
     public float timeSlowSpeed = 20;
 
+    bool isInvulnerable = false;
+    public GameObject player;
+
+    public Transform respawn;
+
     void Start()
     {
-
+        
     }
 
     void Update()
@@ -53,4 +58,27 @@ public class PlayerMovement : MonoBehaviour
             speed = baseSpeed;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("EnemyBullet") && isInvulnerable == false)
+        {
+            Respawn();
+        }
+    }
+
+    void Respawn()
+    {
+        isInvulnerable = true;
+        transform.position = respawn.position;
+        Time.timeScale = 0.5f;
+        //StartCoroutine(WaitSeconds());
+    }
+
+    /*IEnumerator WaitSeconds()
+    {
+        new WaitForSecondsRealtime(5);
+        isInvulnerable = false;
+        Time.timeScale = 1;
+    }*/
 }
