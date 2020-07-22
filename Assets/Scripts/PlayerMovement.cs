@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public Text livesCount;
     public static bool isDead = false;
     bool gameOver = false;
+    int continues = 3;
 
     bool isInvulnerable = false;
     public GameObject player;
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform respawn;
 
     public GameObject endScreen;
+    public GameObject endScreenN;
 
     void Start()
     {
@@ -93,7 +95,14 @@ public class PlayerMovement : MonoBehaviour
     {
         rend.enabled = false;
         Time.timeScale = 0;
-        endScreen.SetActive(true);
+        if (continues > 0)
+        {
+            endScreen.SetActive(true);
+        }
+        else
+        {
+            endScreenN.SetActive(true);
+        }
     }
 
     IEnumerator WaitSeconds()
@@ -115,6 +124,30 @@ public class PlayerMovement : MonoBehaviour
         if(lives == 0)
         {
             gameOver = true;
+        }
+    }
+
+    void ResetGame()
+    {
+        lives = 3;
+        Score.score = 0;
+        rend.enabled = true;
+        col.enabled = true;
+        transform.position = respawn.position;
+        isDead = false;
+        isInvulnerable = false;
+        Time.timeScale = 1;
+        continues--;
+        livesCount.text = "Lives: " + lives.ToString();
+        endScreen.SetActive(false);
+        gameOver = false;
+    }
+
+    public void Continue()
+    {
+        if(continues > 0)
+        {
+            ResetGame();
         }
     }
 }
