@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform respawn;
 
+    public GameObject endScreen;
+
     void Start()
     {
         
@@ -91,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rend.enabled = false;
         Time.timeScale = 0;
+        endScreen.SetActive(true);
     }
 
     IEnumerator WaitSeconds()
@@ -102,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         col.enabled = false;
         isDead = true;
         livesCount.text = "Lives: " + lives.ToString();
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(1.5f);
         transform.position = respawn.position;
         isDead = false;
         rend.enabled = true;

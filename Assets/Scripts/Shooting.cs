@@ -16,7 +16,7 @@ public class Shooting : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Z))
         {
-            if(isShooting == false)
+            if (isShooting == false && PlayerMovement.isDead == false)
             {
                 Power();
             }

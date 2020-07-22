@@ -53,9 +53,13 @@ public class MobBehavior : MonoBehaviour
 
     IEnumerator Defeat()
     {
-        Instantiate(powerPickup, bulletSpawn);
+        for (int i = 0; i < Random.Range(3, 7); i++)
+        {
+            Instantiate(powerPickup, bulletSpawn);
+        }
         isDead = true;
-        yield return new WaitForSeconds(0.2f);
+        Score.score = Score.score + 500;
+        yield return new WaitForSeconds(0.01f);
         Destroy(this.gameObject);
     }
 }
