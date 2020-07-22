@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,9 +11,13 @@ public class PlayerMovement : MonoBehaviour
     public float timeSlowSpeed = 20;
 
     public int lives;
+    public Text livesCount;
+    public static bool isDead = false;
+    bool gameOver = false;
 
     bool isInvulnerable = false;
     public GameObject player;
+    public Renderer rend;
 
     public Transform respawn;
 
@@ -69,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Respawn();
             }
-            if (lives == 0)
+            if (lives == 0 && gameOver == true)
             {
                 EndGame();
             }
@@ -83,7 +88,8 @@ public class PlayerMovement : MonoBehaviour
 
     void EndGame()
     {
-
+        rend.enabled = false;
+        Time.timeScale = 0;
     }
 
     IEnumerator WaitSeconds()
@@ -91,9 +97,18 @@ public class PlayerMovement : MonoBehaviour
         lives--;
         isInvulnerable = true;
         Time.timeScale = 0.5f;
+        rend.enabled = false;
+        isDead = true;
+        livesCount.text = "Lives: " + lives.ToString();
         yield return new WaitForSecondsRealtime(3);
         transform.position = respawn.position;
+        isDead = false;
+        rend.enabled = true;
         isInvulnerable = false;
         Time.timeScale = 1;
+        if(lives == 0)
+        {
+            gameOver = true;
+        }
     }
 }

@@ -13,7 +13,7 @@ public class TimeSlow : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (timeSlowed == false)
+            if (timeSlowed == false && PlayerMovement.isDead == false)
             {
                 SlowTime();
             }
