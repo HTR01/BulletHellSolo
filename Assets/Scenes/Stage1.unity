@@ -419,6 +419,7 @@ MonoBehaviour:
   livesCount: {fileID: 1898378644}
   player: {fileID: 277614843}
   rend: {fileID: 277614845}
+  col: {fileID: 277614844}
   respawn: {fileID: 1398053827}
 --- !u!114 &277614849
 MonoBehaviour:

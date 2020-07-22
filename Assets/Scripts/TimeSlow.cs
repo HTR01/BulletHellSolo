@@ -34,6 +34,10 @@ public class TimeSlow : MonoBehaviour
         {
             slowTimer += 0.3f;
         }
+        if(PlayerMovement.isDead == true)
+        {
+            timeSlowed = false;
+        }
 
         cooldown.fillAmount = slowTimer / 100;
     }

@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     bool isInvulnerable = false;
     public GameObject player;
     public Renderer rend;
+    public Collider col;
 
     public Transform respawn;
 
@@ -98,12 +99,14 @@ public class PlayerMovement : MonoBehaviour
         isInvulnerable = true;
         Time.timeScale = 0.5f;
         rend.enabled = false;
+        col.enabled = false;
         isDead = true;
         livesCount.text = "Lives: " + lives.ToString();
         yield return new WaitForSecondsRealtime(3);
         transform.position = respawn.position;
         isDead = false;
         rend.enabled = true;
+        col.enabled = true;
         isInvulnerable = false;
         Time.timeScale = 1;
         if(lives == 0)
