@@ -10,6 +10,7 @@ public class Shooting : MonoBehaviour
     bool isShooting = false;
 
     int powerLevel = 1;
+    public float power = 1;
 
     void Update()
     {
@@ -58,5 +59,26 @@ public class Shooting : MonoBehaviour
         isShooting = true;
         yield return new WaitForSeconds(0.5f);
         isShooting = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pickup")){
+            Destroy(other.gameObject);
+            power++;
+
+            if(power <= 10)
+            {
+                powerLevel = 1;
+            }
+            if(power >= 11 && power <= 25)
+            {
+                power = 2;
+            }
+            if(power >= 51 && power <= 75)
+            {
+                power = 3;
+            }
+        }
     }
 }

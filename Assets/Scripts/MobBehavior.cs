@@ -16,6 +16,9 @@ public class MobBehavior : MonoBehaviour
     public GameObject bullet;
     public Transform bulletSpawn;
 
+    public GameObject powerPickup;
+    bool isDead = false;
+
     void Start()
     {
         
@@ -42,9 +45,17 @@ public class MobBehavior : MonoBehaviour
         {
             hp -= damage;
         }
-        if(hp <= 0)
+        if (hp <= 0 && isDead == false)
         {
-            Destroy(this.gameObject);
+            StartCoroutine(Defeat());
         }
+    }
+
+    IEnumerator Defeat()
+    {
+        Instantiate(powerPickup, bulletSpawn);
+        isDead = true;
+        yield return new WaitForSeconds(0.2f);
+        Destroy(this.gameObject);
     }
 }
