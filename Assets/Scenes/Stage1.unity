@@ -415,6 +415,7 @@ MonoBehaviour:
   baseSpeed: 10
   grazeSpeed: 5
   timeSlowSpeed: 20
+  lives: 3
   player: {fileID: 277614843}
   respawn: {fileID: 1398053827}
 --- !u!114 &277614849

@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public float grazeSpeed = 5;
     public float timeSlowSpeed = 20;
 
+    public int lives;
+
     bool isInvulnerable = false;
     public GameObject player;
 
@@ -63,22 +65,35 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("EnemyBullet") && isInvulnerable == false)
         {
-            Respawn();
+            if (lives >= 1)
+            {
+                Respawn();
+            }
+            if (lives == 0)
+            {
+                EndGame();
+            }
         }
     }
 
     void Respawn()
     {
-        isInvulnerable = true;
-        transform.position = respawn.position;
-        Time.timeScale = 0.5f;
-        //StartCoroutine(WaitSeconds());
+        StartCoroutine(WaitSeconds());
     }
 
-    /*IEnumerator WaitSeconds()
+    void EndGame()
     {
-        new WaitForSecondsRealtime(5);
+
+    }
+
+    IEnumerator WaitSeconds()
+    {
+        lives--;
+        isInvulnerable = true;
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(3);
+        transform.position = respawn.position;
         isInvulnerable = false;
         Time.timeScale = 1;
-    }*/
+    }
 }
