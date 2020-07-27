@@ -117,6 +117,7 @@ public class MobBehavior : MonoBehaviour
                 {
                     transform.position = Vector3.MoveTowards(transform.position, locations[2].position, speed * Time.deltaTime);
                 }
+                StartCoroutine(Pattern1());
                 break;
         }
     }
@@ -165,6 +166,13 @@ public class MobBehavior : MonoBehaviour
         isShooting = true;
         yield return new WaitForSeconds(fireRate[1]);
         isShooting = false;
+
+    }
+
+    IEnumerator Pattern1()
+    {
+
+        yield return new WaitForSeconds(1);
 
     }
 }
