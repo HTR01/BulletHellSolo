@@ -1472,10 +1472,14 @@ MonoBehaviour:
   speed: 3
   baseSpeed: 3
   timeSpeed: 1.5
+  bullets:
+  - {fileID: 8750834076074471802, guid: 5fa2189eda9441941bd1250d1f8a01ea, type: 3}
+  - {fileID: 8750834076074471802, guid: 58e0bdf48be0faa459b50942758b0688, type: 3}
   player: {fileID: 277614847}
-  bullet: {fileID: 8750834076074471802, guid: 5fa2189eda9441941bd1250d1f8a01ea, type: 3}
   bulletSpawn: {fileID: 1397319983}
-  fireRate: 1
+  fireRate:
+  - 1
+  - 0.5
   isShooting: 0
   powerPickup: {fileID: 3525610772084179503, guid: ca3e4da4746c9b2409d8d0e329fe98b0,
     type: 3}
