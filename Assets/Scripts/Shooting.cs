@@ -49,7 +49,14 @@ public class Shooting : MonoBehaviour
     {
         Instantiate(bullet, player);
         isShooting = true;
-        yield return new WaitForSeconds(1);
+        if (TimeSlow.timeSlowed == true)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(1);
+        }
         isShooting = false;
     }
 
@@ -57,7 +64,14 @@ public class Shooting : MonoBehaviour
     {
         Instantiate(bullet, player);
         isShooting = true;
-        yield return new WaitForSeconds(0.5f);
+        if (TimeSlow.timeSlowed == true)
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
         isShooting = false;
     }
 

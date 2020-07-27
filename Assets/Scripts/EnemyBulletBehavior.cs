@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyBulletBehavior : MonoBehaviour
 {
-    float speed = 10;
-    float baseSpeed = 10;
-    float timeSpeed = 5f;
+    public float speed = 10;
+    public float baseSpeed = 10;
+    public float timeSpeed = 5f;
 
     Transform playerPos;
     GameObject player;
