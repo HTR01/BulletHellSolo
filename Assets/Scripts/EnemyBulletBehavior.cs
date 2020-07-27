@@ -17,7 +17,7 @@ public class EnemyBulletBehavior : MonoBehaviour
         //playerPos = player.transform;
         playerPos = player.GetComponent<Transform>();
 
-        transform.LookAt(player.transform);
+        //transform.LookAt(player.transform);
     }
 
     void Update()

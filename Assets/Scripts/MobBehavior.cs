@@ -15,6 +15,8 @@ public class MobBehavior : MonoBehaviour
 
     public GameObject bullet;
     public Transform bulletSpawn;
+    public float fireRate;
+    public bool isShooting = false;
 
     public GameObject powerPickup;
     bool isDead = false;
@@ -36,7 +38,12 @@ public class MobBehavior : MonoBehaviour
             speed = baseSpeed;
         }
 
-        Instantiate(bullet, bulletSpawn);
+        if(isShooting == false)
+        {
+            StartCoroutine(Shoot());
+        }
+
+        transform.LookAt(player.transform);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,5 +68,14 @@ public class MobBehavior : MonoBehaviour
         Score.score = Score.score + 500;
         yield return new WaitForSeconds(0.01f);
         Destroy(this.gameObject);
+    }
+
+    IEnumerator Shoot()
+    {
+        Instantiate(bullet, bulletSpawn);
+        isShooting = true;
+        yield return new WaitForSeconds(fireRate);
+        isShooting = false;
+
     }
 }
