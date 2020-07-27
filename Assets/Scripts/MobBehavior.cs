@@ -4,32 +4,49 @@ using UnityEngine;
 
 public class MobBehavior : MonoBehaviour
 {
+    // HP RELATED
+    [Header("Health Settings")]
     public float hp;
     public float damage;
 
+    // SPEED RELATED
+    [Header("Speed Settings")]
     public float speed;
     public float baseSpeed;
     public float timeSpeed;
-    int hpSwitch = 1;
 
+    // LISTS
+    [Header("Lists")]
     public GameObject[] bullets;
-
-    public Transform player;
-
-    public Transform bulletSpawn;
     public float[] fireRate;
-    public bool isShooting = false;
+    public Transform[] locations;
 
+    // SINGLE TRANSFORMS
+    [Header("Transforms")]
+    public Transform player;
+    public Transform bulletSpawn;
+
+    [Header("Misc")]
     public GameObject powerPickup;
+
+    // BOOLS
+
+    public bool isShooting = false;
     bool isDead = false;
+
+    // SWITCH STATEMENT VALUES
+
+    int enemyState = 1;
+    int hpSwitch = 1;
+    int moveState = 1;
 
     void Start()
     {
-        
+
     }
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
 
         if(TimeSlow.timeSlowed == true)
         {
@@ -42,11 +59,11 @@ public class MobBehavior : MonoBehaviour
 
         if(isShooting == false)
         {
-            //StartCoroutine(Shoot());
             Shooting();
         }
+        //transform.LookAt(player.transform);
 
-        transform.LookAt(player.transform);
+        Movement();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -64,6 +81,48 @@ public class MobBehavior : MonoBehaviour
             StartCoroutine(Defeat());
         }
     }
+    
+    // BEHAVIOR METHODS
+
+    void Movement()
+    {
+        switch (enemyState)
+        {
+            case 1:
+                if(transform.position == locations[1].position)
+                {
+                    moveState = 1;
+                }
+                if(transform.position == locations[0].position)
+                {
+                    moveState = 2;
+                }
+                if (moveState == 1)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, locations[0].position, speed * Time.deltaTime);
+                }
+                if (moveState == 2)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, locations[1].position, speed * Time.deltaTime);
+                }
+                break;
+        }
+    }
+    
+    void Shooting()
+    {
+        switch(hpSwitch)
+        {
+            case 1:
+                StartCoroutine(Shoot1());
+                break;
+            case 2:
+                StartCoroutine(Shoot2());
+                break;
+        }
+    }
+
+    // DEATH COROUTINE
 
     IEnumerator Defeat()
     {
@@ -76,6 +135,8 @@ public class MobBehavior : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
         Destroy(this.gameObject);
     }
+
+    // SHOOTING COROUTINES
 
     IEnumerator Shoot1()
     {
@@ -93,18 +154,5 @@ public class MobBehavior : MonoBehaviour
         yield return new WaitForSeconds(fireRate[1]);
         isShooting = false;
 
-    }
-
-    void Shooting()
-    {
-        switch (hpSwitch)
-        {
-            case 1:
-                StartCoroutine(Shoot1());
-                break;
-            case 2:
-                StartCoroutine(Shoot2());
-                break;
-        }
     }
 }
