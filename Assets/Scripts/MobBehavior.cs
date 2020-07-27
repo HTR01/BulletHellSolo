@@ -75,6 +75,7 @@ public class MobBehavior : MonoBehaviour
         if(hp <= 10)
         {
             hpSwitch = 2;
+            enemyState = 2;
         }
         if (hp <= 0 && isDead == false)
         {
@@ -108,7 +109,14 @@ public class MobBehavior : MonoBehaviour
                 break;
 
             case 2:
-
+                if(transform.position == locations[2].position)
+                {
+                    break;
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, locations[2].position, speed * Time.deltaTime);
+                }
                 break;
         }
     }
