@@ -106,6 +106,10 @@ public class MobBehavior : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position, locations[1].position, speed * Time.deltaTime);
                 }
                 break;
+
+            case 2:
+
+                break;
         }
     }
     

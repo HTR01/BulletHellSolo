@@ -5,26 +5,30 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Speed")]
     public float speed = 10;
     public float baseSpeed = 10;
     public float grazeSpeed = 5;
     public float timeSlowSpeed = 20;
 
+    [Header("Lives")]
     public int lives;
     public Text livesCount;
     public static bool isDead = false;
     bool gameOver = false;
     int continues = 3;
-
+    public GameObject endScreen;
+    public GameObject endScreenN;
     bool isInvulnerable = false;
+
+    [Header("Player")]
     public GameObject player;
     public Renderer rend;
     public Collider col;
 
     public Transform respawn;
 
-    public GameObject endScreen;
-    public GameObject endScreenN;
+    
 
     void Start()
     {
