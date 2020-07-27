@@ -10,12 +10,14 @@ public class MobBehavior : MonoBehaviour
     public float speed;
     public float baseSpeed;
     public float timeSpeed;
+    int hpSwitch = 1;
+
+    public GameObject[] bullets;
 
     public Transform player;
 
-    public GameObject bullet;
     public Transform bulletSpawn;
-    public float fireRate;
+    public float[] fireRate;
     public bool isShooting = false;
 
     public GameObject powerPickup;
@@ -40,7 +42,8 @@ public class MobBehavior : MonoBehaviour
 
         if(isShooting == false)
         {
-            StartCoroutine(Shoot());
+            //StartCoroutine(Shoot());
+            Shooting();
         }
 
         transform.LookAt(player.transform);
@@ -51,6 +54,10 @@ public class MobBehavior : MonoBehaviour
         if(other.gameObject.CompareTag("Bullet"))
         {
             hp -= damage;
+        }
+        if(hp <= 10)
+        {
+            hpSwitch = 2;
         }
         if (hp <= 0 && isDead == false)
         {
@@ -70,12 +77,34 @@ public class MobBehavior : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    IEnumerator Shoot()
+    IEnumerator Shoot1()
     {
-        Instantiate(bullet, bulletSpawn);
+        Instantiate(bullets[0], bulletSpawn);
         isShooting = true;
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(fireRate[0]);
         isShooting = false;
 
+    }
+
+    IEnumerator Shoot2()
+    {
+        Instantiate(bullets[1], bulletSpawn);
+        isShooting = true;
+        yield return new WaitForSeconds(fireRate[1]);
+        isShooting = false;
+
+    }
+
+    void Shooting()
+    {
+        switch (hpSwitch)
+        {
+            case 1:
+                StartCoroutine(Shoot1());
+                break;
+            case 2:
+                StartCoroutine(Shoot2());
+                break;
+        }
     }
 }
