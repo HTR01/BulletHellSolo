@@ -702,7 +702,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.8, z: 0.8}
+  m_Size: {x: 0.5701435, y: 0.5701435, z: 0.5701435}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &277614845
 MeshRenderer:
@@ -814,7 +814,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef98ace7f418514291f00cef9345458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 8750834076074471802, guid: b2390e41c9463ed48b2a90bf4207a331, type: 3}
+  bullet:
+  - {fileID: 8750834076074471802, guid: b2390e41c9463ed48b2a90bf4207a331, type: 3}
+  - {fileID: 7497390918925051034, guid: f961f25071ca4d24a82c926cff29e169, type: 3}
   player: {fileID: 277614847}
   power: 1
 --- !u!54 &277614851

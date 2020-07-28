@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    public GameObject bullet;
+    public GameObject[] bullet;
     public Transform player;
 
     bool isShooting = false;
@@ -47,30 +47,30 @@ public class Shooting : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        Instantiate(bullet, player);
+        Instantiate(bullet[0], player);
         isShooting = true;
         if (TimeSlow.timeSlowed == true)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.05f);
         }
         else
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
         }
         isShooting = false;
     }
 
     IEnumerator Shoot2()
     {
-        Instantiate(bullet, player);
+        Instantiate(bullet[1], player);
         isShooting = true;
         if (TimeSlow.timeSlowed == true)
         {
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.05f);
         }
         else
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.01f);
         }
         isShooting = false;
     }
