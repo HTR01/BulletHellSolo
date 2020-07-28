@@ -26,6 +26,11 @@ public class MobBehavior : MonoBehaviour
     public Transform player;
     public Transform bulletSpawn;
 
+    // TIMER
+    [Header("Timer")]
+    float timeToGo;
+    public float addedTime;
+
     [Header("Misc")]
     public GameObject powerPickup;
 
@@ -42,7 +47,7 @@ public class MobBehavior : MonoBehaviour
 
     void Start()
     {
-
+        timeToGo = Time.fixedTime + addedTime;
     }
     void Update()
     {
@@ -130,7 +135,7 @@ public class MobBehavior : MonoBehaviour
                 StartCoroutine(Shoot1());
                 break;
             case 2:
-                StartCoroutine(Shoot2());
+                StartCoroutine(Pattern1());
                 break;
         }
     }
@@ -171,8 +176,29 @@ public class MobBehavior : MonoBehaviour
 
     IEnumerator Pattern1()
     {
-
+        isShooting = true;
+        CircleShoot();
         yield return new WaitForSeconds(1);
+        isShooting = false;
+    }
 
+    void CircleShoot()
+    {
+        Instantiate(bullets[0], locations[0]);
+        Instantiate(bullets[0], locations[1]);
+        Instantiate(bullets[0], locations[2]);
+        Instantiate(bullets[0], locations[3]);
+        Instantiate(bullets[0], locations[4]);
+        Instantiate(bullets[0], locations[5]);
+        Instantiate(bullets[0], locations[6]);
+        Instantiate(bullets[0], locations[7]);
+        Instantiate(bullets[0], locations[8]);
+        Instantiate(bullets[0], locations[9]);
+        Instantiate(bullets[0], locations[10]);
+        Instantiate(bullets[0], locations[11]);
+        Instantiate(bullets[0], locations[12]);
+        Instantiate(bullets[0], locations[13]);
+        Instantiate(bullets[0], locations[14]);
+        Instantiate(bullets[0], locations[15]);
     }
 }
