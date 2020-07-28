@@ -20,11 +20,12 @@ public class MobBehavior : MonoBehaviour
     public GameObject[] bullets;
     public float[] fireRate;
     public Transform[] locations;
+    public Transform[] bulletSpawn;
 
     // SINGLE TRANSFORMS
     [Header("Transforms")]
     public Transform player;
-    public Transform bulletSpawn;
+    
 
     // TIMER
     [Header("Timer")]
@@ -122,7 +123,6 @@ public class MobBehavior : MonoBehaviour
                 {
                     transform.position = Vector3.MoveTowards(transform.position, locations[2].position, speed * Time.deltaTime);
                 }
-                StartCoroutine(Pattern1());
                 break;
         }
     }
@@ -146,7 +146,7 @@ public class MobBehavior : MonoBehaviour
     {
         for (int i = 0; i < Random.Range(3, 7); i++)
         {
-            Instantiate(powerPickup, bulletSpawn);
+            Instantiate(powerPickup, bulletSpawn[0]);
         }
         isDead = true;
         Score.score = Score.score + 500;
@@ -158,7 +158,7 @@ public class MobBehavior : MonoBehaviour
 
     IEnumerator Shoot1()
     {
-        Instantiate(bullets[0], bulletSpawn);
+        Instantiate(bullets[1], bulletSpawn[0]);
         isShooting = true;
         yield return new WaitForSeconds(fireRate[0]);
         isShooting = false;
@@ -167,7 +167,7 @@ public class MobBehavior : MonoBehaviour
 
     IEnumerator Shoot2()
     {
-        Instantiate(bullets[1], bulletSpawn);
+        Instantiate(bullets[1], bulletSpawn[0]);
         isShooting = true;
         yield return new WaitForSeconds(fireRate[1]);
         isShooting = false;
@@ -176,29 +176,29 @@ public class MobBehavior : MonoBehaviour
 
     IEnumerator Pattern1()
     {
-        isShooting = true;
         CircleShoot();
-        yield return new WaitForSeconds(1);
+        isShooting = true;
+        yield return new WaitForSeconds(fireRate[2]);
         isShooting = false;
     }
 
     void CircleShoot()
     {
-        Instantiate(bullets[0], locations[0]);
-        Instantiate(bullets[0], locations[1]);
-        Instantiate(bullets[0], locations[2]);
-        Instantiate(bullets[0], locations[3]);
-        Instantiate(bullets[0], locations[4]);
-        Instantiate(bullets[0], locations[5]);
-        Instantiate(bullets[0], locations[6]);
-        Instantiate(bullets[0], locations[7]);
-        Instantiate(bullets[0], locations[8]);
-        Instantiate(bullets[0], locations[9]);
-        Instantiate(bullets[0], locations[10]);
-        Instantiate(bullets[0], locations[11]);
-        Instantiate(bullets[0], locations[12]);
-        Instantiate(bullets[0], locations[13]);
-        Instantiate(bullets[0], locations[14]);
-        Instantiate(bullets[0], locations[15]);
+        Instantiate(bullets[0], bulletSpawn[0]);
+        Instantiate(bullets[0], bulletSpawn[1]);
+        Instantiate(bullets[0], bulletSpawn[2]);
+        Instantiate(bullets[0], bulletSpawn[3]);
+        Instantiate(bullets[0], bulletSpawn[4]);
+        Instantiate(bullets[0], bulletSpawn[5]);
+        Instantiate(bullets[0], bulletSpawn[6]);
+        Instantiate(bullets[0], bulletSpawn[7]);
+        Instantiate(bullets[0], bulletSpawn[8]);
+        Instantiate(bullets[0], bulletSpawn[9]);
+        Instantiate(bullets[0], bulletSpawn[10]);
+        Instantiate(bullets[0], bulletSpawn[11]);
+        Instantiate(bullets[0], bulletSpawn[12]);
+        Instantiate(bullets[0], bulletSpawn[13]);
+        Instantiate(bullets[0], bulletSpawn[14]);
+        Instantiate(bullets[0], bulletSpawn[15]);
     }
 }
