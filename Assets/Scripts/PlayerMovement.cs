@@ -59,12 +59,18 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             speedState = 2;
-            hitbox.SetActive(true);
+            if (isInvulnerable == false)
+            {
+                hitbox.SetActive(true);
+            }
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             speedState = 1;
-            hitbox.SetActive(false);
+            if (isInvulnerable == false)
+            {
+                hitbox.SetActive(false);
+            }
         }
 
         switch (speedState)
@@ -116,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
     void EndGame()
     {
         rend.enabled = false;
+        hitbox.SetActive(false);
         Time.timeScale = 0;
         if (continues > 0)
         {
@@ -131,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
     {
         lives--;
         isInvulnerable = true;
+        hitbox.SetActive(false);
         Time.timeScale = 0.5f;
         rend.enabled = false;
         col.enabled = false;
