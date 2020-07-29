@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float grazeSpeed = 5;
     public float timeSlowSpeed = 20;
     int speedState = 1;
+    public float dash;
 
     [Header("Lives")]
     public int lives;
@@ -174,33 +175,33 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator PartialInvulUp()
     {
         isInvulnerable = true;
-        transform.position += Vector3.up;
+        transform.position += Vector3.up * dash;
         TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         isInvulnerable = false;
     }
     IEnumerator PartialInvulDown()
     {
         isInvulnerable = true;
-        transform.position += Vector3.down;
+        transform.position += Vector3.down * dash;
         TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         isInvulnerable = false;
     }
     IEnumerator PartialInvulLeft()
     {
         isInvulnerable = true;
-        transform.position += Vector3.left;
+        transform.position += Vector3.left * dash;
         TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         isInvulnerable = false;
     }
     IEnumerator PartialInvulRight()
     {
         isInvulnerable = true;
-        transform.position += Vector3.right;
+        transform.position += Vector3.right * dash;
         TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         isInvulnerable = false;
     }
 

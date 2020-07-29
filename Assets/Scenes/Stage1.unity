@@ -811,6 +811,7 @@ MonoBehaviour:
   baseSpeed: 10
   grazeSpeed: 5
   timeSlowSpeed: 20
+  dash: 2
   lives: 3
   livesCount: {fileID: 1898378644}
   endScreen: {fileID: 481978619}
@@ -832,7 +833,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7768c2a45e7a8b34e89b0245c3e4301a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowTimer: 100
   cooldown: {fileID: 1765276263}
 --- !u!114 &277614850
 MonoBehaviour:
