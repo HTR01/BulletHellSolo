@@ -21,11 +21,12 @@ public class MobBehavior : MonoBehaviour
     public float[] fireRate;
     public Transform[] locations;
     public Transform[] bulletSpawn;
+    public GameObject[] rotater;
 
     // SINGLE TRANSFORMS
     [Header("Transforms")]
     public Transform player;
-    
+
 
     // TIMER
     [Header("Timer")]
@@ -39,6 +40,7 @@ public class MobBehavior : MonoBehaviour
 
     public bool isShooting = false;
     bool isDead = false;
+    public static bool isRotation = false;
 
     // SWITCH STATEMENT VALUES
 
@@ -54,7 +56,7 @@ public class MobBehavior : MonoBehaviour
     {
         //transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
 
-        if(TimeSlow.timeSlowed == true)
+        if (TimeSlow.timeSlowed == true)
         {
             speed = timeSpeed;
         }
@@ -63,7 +65,7 @@ public class MobBehavior : MonoBehaviour
             speed = baseSpeed;
         }
 
-        if(isShooting == false)
+        if (isShooting == false)
         {
             Shooting();
         }
@@ -74,11 +76,11 @@ public class MobBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet"))
         {
             hp -= damage;
         }
-        if(hp <= 10)
+        if (hp <= 10)
         {
             hpSwitch = 2;
             enemyState = 2;
@@ -88,7 +90,7 @@ public class MobBehavior : MonoBehaviour
             StartCoroutine(Defeat());
         }
     }
-    
+
     // BEHAVIOR METHODS
 
     void Movement()
@@ -96,11 +98,22 @@ public class MobBehavior : MonoBehaviour
         switch (enemyState)
         {
             case 1:
-                if(transform.position == locations[1].position)
+                if (transform.position == locations[2].position)
+                {
+                    break;
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, locations[2].position, speed * Time.deltaTime);
+                }
+                break;
+
+            case 2:
+                if (transform.position == locations[1].position)
                 {
                     moveState = 1;
                 }
-                if(transform.position == locations[0].position)
+                if (transform.position == locations[0].position)
                 {
                     moveState = 2;
                 }
@@ -114,28 +127,26 @@ public class MobBehavior : MonoBehaviour
                 }
                 break;
 
-            case 2:
-                if(transform.position == locations[2].position)
-                {
-                    break;
-                }
-                else
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, locations[2].position, speed * Time.deltaTime);
-                }
+            case 3:
+
                 break;
         }
     }
-    
+
     void Shooting()
     {
-        switch(hpSwitch)
+        switch (hpSwitch)
         {
             case 1:
-                StartCoroutine(Shoot1());
+                StartCoroutine(Pattern1());
+                rotater[0].transform.Rotate(0.0f, 0.0f, 7.0f, Space.World);
                 break;
             case 2:
-                StartCoroutine(Pattern1());
+                rotater[0].transform.Rotate(0.0f, 0.0f, 30.0f, Space.World);
+                StartCoroutine(Pattern2());
+                break;
+            case 3:
+                rotater[0].transform.Rotate(0.0f, 0.0f, 30.0f, Space.World);
                 break;
         }
     }
@@ -203,23 +214,54 @@ public class MobBehavior : MonoBehaviour
         isShooting = false;
     }
 
+    IEnumerator Pattern2()
+    {
+        CircleShoot();
+        isShooting = true;
+        if (TimeSlow.timeSlowed == true)
+        {
+            yield return new WaitForSeconds(fireRate[3] * 2);
+        }
+        else
+        {
+            yield return new WaitForSeconds(fireRate[3]);
+        }
+        isShooting = false;
+    }
+
+    IEnumerator Pattern3()
+    {
+        LookShoot();
+        isShooting = true;
+        if (TimeSlow.timeSlowed == true)
+        {
+            yield return new WaitForSeconds(fireRate[3] * 2);
+        }
+        else
+        {
+            yield return new WaitForSeconds(fireRate[3]);
+        }
+        isShooting = false;
+    }
+
     void CircleShoot()
     {
-        Instantiate(bullets[0], bulletSpawn[0]);
-        Instantiate(bullets[0], bulletSpawn[1]);
-        Instantiate(bullets[0], bulletSpawn[2]);
-        Instantiate(bullets[0], bulletSpawn[3]);
-        Instantiate(bullets[0], bulletSpawn[4]);
-        Instantiate(bullets[0], bulletSpawn[5]);
-        Instantiate(bullets[0], bulletSpawn[6]);
-        Instantiate(bullets[0], bulletSpawn[7]);
-        Instantiate(bullets[0], bulletSpawn[8]);
-        Instantiate(bullets[0], bulletSpawn[9]);
-        Instantiate(bullets[0], bulletSpawn[10]);
-        Instantiate(bullets[0], bulletSpawn[11]);
-        Instantiate(bullets[0], bulletSpawn[12]);
-        Instantiate(bullets[0], bulletSpawn[13]);
-        Instantiate(bullets[0], bulletSpawn[14]);
-        Instantiate(bullets[0], bulletSpawn[15]);
+        int spawn = 0; 
+        for (int i = 0; i < 16; i++)
+        {
+            Instantiate(bullets[0], bulletSpawn[spawn]);
+            spawn++;
+        }
+    }
+
+    void LookShoot()
+    {
+        int spawn = 0;
+        for (int i = 0; i < 5; i++)
+        {
+            bulletSpawn[spawn].transform.LookAt(player);
+            Instantiate(bullets[0], bulletSpawn[spawn]);
+            spawn++;
+        }
     }
 }

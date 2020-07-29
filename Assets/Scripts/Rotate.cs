@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    public int rotation;
     void Update()
     {
-        transform.Rotate(90.0f, 0.0f, 0.0f, Space.World);
+        if (MobBehavior.isRotation == true) {
+            transform.Rotate(0.0f, 0.0f, rotation, Space.World);
+        }
     }
 }

@@ -30,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform respawn;
 
-    
-
     void Start()
     {
         
@@ -71,6 +69,22 @@ public class PlayerMovement : MonoBehaviour
             {
                 hitbox.SetActive(false);
             }
+        }
+        if (Input.GetKeyDown(KeyCode.X) && Input.GetKey(KeyCode.UpArrow) && TimeSlow.slowTimer >= 30)
+        {
+            StartCoroutine(PartialInvulUp());
+        }
+        if (Input.GetKeyDown(KeyCode.X) && Input.GetKey(KeyCode.DownArrow) && TimeSlow.slowTimer >= 30)
+        {
+            StartCoroutine(PartialInvulDown());
+        }
+        if (Input.GetKeyDown(KeyCode.X) && Input.GetKey(KeyCode.LeftArrow) && TimeSlow.slowTimer >= 30)
+        {
+            StartCoroutine(PartialInvulLeft());
+        }
+        if (Input.GetKeyDown(KeyCode.X) && Input.GetKey(KeyCode.RightArrow) && TimeSlow.slowTimer >= 30)
+        {
+            StartCoroutine(PartialInvulRight());
         }
 
         switch (speedState)
@@ -155,6 +169,39 @@ public class PlayerMovement : MonoBehaviour
         {
             gameOver = true;
         }
+    }
+
+    IEnumerator PartialInvulUp()
+    {
+        isInvulnerable = true;
+        transform.position += Vector3.up;
+        TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
+        yield return new WaitForSeconds(0.5f);
+        isInvulnerable = false;
+    }
+    IEnumerator PartialInvulDown()
+    {
+        isInvulnerable = true;
+        transform.position += Vector3.down;
+        TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
+        yield return new WaitForSeconds(0.5f);
+        isInvulnerable = false;
+    }
+    IEnumerator PartialInvulLeft()
+    {
+        isInvulnerable = true;
+        transform.position += Vector3.left;
+        TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
+        yield return new WaitForSeconds(0.5f);
+        isInvulnerable = false;
+    }
+    IEnumerator PartialInvulRight()
+    {
+        isInvulnerable = true;
+        transform.position += Vector3.right;
+        TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
+        yield return new WaitForSeconds(0.5f);
+        isInvulnerable = false;
     }
 
     void ResetGame()
