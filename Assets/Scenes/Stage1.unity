@@ -702,8 +702,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5701435, y: 0.5701435, z: 0.5701435}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.3981657, y: 0.3981657, z: 0.3981657}
+  m_Center: {x: 0, y: 0, z: 0.08598887}
 --- !u!23 &277614845
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -760,7 +760,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 900607614}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -776,15 +777,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6847cbcc21b4f04bbc4c529eb1e3c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  baseSpeed: 10
-  grazeSpeed: 5
-  timeSlowSpeed: 20
+  speed: 8
+  baseSpeed: 8
+  grazeSpeed: 4
+  timeSlowSpeed: 16
   lives: 3
   livesCount: {fileID: 1898378644}
   endScreen: {fileID: 481978619}
   endScreenN: {fileID: 304557797}
   player: {fileID: 277614843}
+  hitbox: {fileID: 900607610}
   rend: {fileID: 277614845}
   col: {fileID: 277614844}
   respawn: {fileID: 1398053827}
@@ -816,7 +818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet:
   - {fileID: 8750834076074471802, guid: b2390e41c9463ed48b2a90bf4207a331, type: 3}
-  - {fileID: 7497390918925051034, guid: f961f25071ca4d24a82c926cff29e169, type: 3}
+  - {fileID: 8750834076074471802, guid: b2390e41c9463ed48b2a90bf4207a331, type: 3}
   player: {fileID: 277614847}
   power: 1
 --- !u!54 &277614851
@@ -1416,6 +1418,84 @@ Transform:
   m_Father: {fileID: 324068607}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 135}
+--- !u!1 &900607610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900607614}
+  - component: {fileID: 900607613}
+  - component: {fileID: 900607612}
+  m_Layer: 0
+  m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!23 &900607612
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900607610}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &900607613
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900607610}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &900607614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900607610}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.687}
+  m_LocalScale: {x: 0.38861, y: 0.38861, z: 0.38861}
+  m_Children: []
+  m_Father: {fileID: 277614847}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &952634671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,7 +2018,7 @@ MonoBehaviour:
   fireRate:
   - 1
   - 0.5
-  - 0.1
+  - 0.3
   locations:
   - {fileID: 593216776}
   - {fileID: 798547993}

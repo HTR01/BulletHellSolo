@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float baseSpeed = 10;
     public float grazeSpeed = 5;
     public float timeSlowSpeed = 20;
+    int speedState = 1;
 
     [Header("Lives")]
     public int lives;
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Player")]
     public GameObject player;
+    public GameObject hitbox;
     public Renderer rend;
     public Collider col;
 
@@ -54,25 +56,41 @@ public class PlayerMovement : MonoBehaviour
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (TimeSlow.timeSlowed == true)
-            {
-                speed = grazeSpeed * 2;
+            speedState = 2;
+            hitbox.SetActive(true);
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speedState = 1;
+            hitbox.SetActive(false);
+        }
+
+        switch (speedState)
+        {
+            case 1:
+                    if (TimeSlow.timeSlowed == true)
+                    {
+                        speed = timeSlowSpeed;
+                    }
+                    else
+                    {
+                        speed = baseSpeed;
+                    }
+                    break;
+
+            case 2:
+                    if (TimeSlow.timeSlowed == true)
+                    {
+                        speed = grazeSpeed * 2;
+                    }
+                    else
+                    {
+                        speed = grazeSpeed;
+                    }
+                    break;
             }
-            else
-            {
-                speed = grazeSpeed;
-            }
-        }
-        else if(TimeSlow.timeSlowed == true)
-        {
-            speed = timeSlowSpeed;
-        }
-        else
-        {
-            speed = baseSpeed;
-        }
     }
 
     private void OnTriggerEnter(Collider other)

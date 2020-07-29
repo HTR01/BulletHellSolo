@@ -160,7 +160,14 @@ public class MobBehavior : MonoBehaviour
     {
         Instantiate(bullets[1], bulletSpawn[0]);
         isShooting = true;
-        yield return new WaitForSeconds(fireRate[0]);
+        if (TimeSlow.timeSlowed == true)
+        {
+            yield return new WaitForSeconds(fireRate[0] * 2);
+        }
+        else
+        {
+            yield return new WaitForSeconds(fireRate[0]);
+        }
         isShooting = false;
 
     }
@@ -169,7 +176,14 @@ public class MobBehavior : MonoBehaviour
     {
         Instantiate(bullets[1], bulletSpawn[0]);
         isShooting = true;
-        yield return new WaitForSeconds(fireRate[1]);
+        if (TimeSlow.timeSlowed == true)
+        {
+            yield return new WaitForSeconds(fireRate[1] * 2);
+        }
+        else
+        {
+            yield return new WaitForSeconds(fireRate[1]);
+        }
         isShooting = false;
 
     }
@@ -178,7 +192,14 @@ public class MobBehavior : MonoBehaviour
     {
         CircleShoot();
         isShooting = true;
-        yield return new WaitForSeconds(fireRate[2]);
+        if (TimeSlow.timeSlowed == true)
+        {
+            yield return new WaitForSeconds(fireRate[2] * 2);
+        }
+        else
+        {
+            yield return new WaitForSeconds(fireRate[2]);
+        }
         isShooting = false;
     }
 
