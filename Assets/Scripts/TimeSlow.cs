@@ -30,7 +30,7 @@ public class TimeSlow : MonoBehaviour
                 NormalTime();
             }
         }
-        else if(slowTimer < 100)
+        else if(slowTimer < 100 && PauseMenu.isPaused == false)
         {
             slowTimer += 0.3f;
         }
