@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
-    float speed = 15;
-    float baseSpeed = 15;
-    float timeSpeed = 30;
+    public float speed = 15;
+    public float baseSpeed = 15;
+    public float timeSpeed = 30;
 
     void Update()
     {

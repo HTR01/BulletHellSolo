@@ -13,11 +13,11 @@ public class TimeSlow : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (timeSlowed == false && PlayerMovement.isDead == false)
+            if (timeSlowed == false && PlayerMovement.isDead == false && PauseMenu.isPaused == false)
             {
                 SlowTime();
             }
-            else
+            else if(PauseMenu.isPaused == false)
             {
                 NormalTime();
             }

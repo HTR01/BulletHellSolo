@@ -58,18 +58,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             speedState = 2;
-            if (isInvulnerable == false)
-            {
-                hitbox.SetActive(true);
-            }
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             speedState = 1;
-            if (isInvulnerable == false)
-            {
-                hitbox.SetActive(false);
-            }
         }
         if (Input.GetKeyDown(KeyCode.X) && Input.GetKey(KeyCode.UpArrow) && TimeSlow.slowTimer >= 30)
         {
@@ -159,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
         col.enabled = false;
         isDead = true;
         livesCount.text = "Lives: " + lives.ToString();
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(2f);
         transform.position = respawn.position;
         isDead = false;
         rend.enabled = true;

@@ -80,11 +80,22 @@ public class MobBehavior : MonoBehaviour
         {
             hp -= damage;
         }
-        if (hp <= 10)
+        if (hp <= 150)
         {
             hpSwitch = 2;
             enemyState = 2;
         }
+        if(hp <= 100)
+        {
+            hpSwitch = 3;
+            enemyState = 3;
+        }
+        if(hp <= 50)
+        {
+            hpSwitch = 4;
+            enemyState = 4;
+        }
+
         if (hp <= 0 && isDead == false)
         {
             StartCoroutine(Defeat());
@@ -109,6 +120,17 @@ public class MobBehavior : MonoBehaviour
                 break;
 
             case 2:
+                if (transform.position == locations[2].position)
+                {
+                    break;
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, locations[2].position, speed * Time.deltaTime);
+                }
+                break;
+
+            case 3:
                 if (transform.position == locations[1].position)
                 {
                     moveState = 1;
@@ -127,8 +149,15 @@ public class MobBehavior : MonoBehaviour
                 }
                 break;
 
-            case 3:
-
+            case 4:
+                if (transform.position == locations[2].position)
+                {
+                    break;
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, locations[2].position, speed * Time.deltaTime);
+                }
                 break;
         }
     }
@@ -139,14 +168,19 @@ public class MobBehavior : MonoBehaviour
         {
             case 1:
                 StartCoroutine(Pattern1());
-                rotater[0].transform.Rotate(0.0f, 0.0f, 7.0f, Space.World);
+                rotater[0].transform.Rotate(0.0f, 0.0f, 10.0f, Space.World);
                 break;
             case 2:
-                rotater[0].transform.Rotate(0.0f, 0.0f, 30.0f, Space.World);
-                StartCoroutine(Pattern2());
+                StartCoroutine(Pattern3());
+                rotater[0].transform.Rotate(0.0f, 0.0f, 10.0f, Space.World);
                 break;
             case 3:
                 rotater[0].transform.Rotate(0.0f, 0.0f, 30.0f, Space.World);
+                StartCoroutine(Pattern2());
+                break;
+            case 4:
+                StartCoroutine(Pattern3());
+                rotater[0].transform.Rotate(0.0f, 0.0f, 7.0f, Space.World);
                 break;
         }
     }
@@ -231,15 +265,19 @@ public class MobBehavior : MonoBehaviour
 
     IEnumerator Pattern3()
     {
-        LookShoot();
+        for (int i = 0; i < 1; i++)
+        {
+            CircleShoot();
+            yield return new WaitForSeconds(0.2f);
+        }
         isShooting = true;
         if (TimeSlow.timeSlowed == true)
         {
-            yield return new WaitForSeconds(fireRate[3] * 2);
+            yield return new WaitForSeconds(fireRate[1] * 2);
         }
         else
         {
-            yield return new WaitForSeconds(fireRate[3]);
+            yield return new WaitForSeconds(fireRate[1]);
         }
         isShooting = false;
     }
@@ -249,17 +287,6 @@ public class MobBehavior : MonoBehaviour
         int spawn = 0; 
         for (int i = 0; i < 16; i++)
         {
-            Instantiate(bullets[0], bulletSpawn[spawn]);
-            spawn++;
-        }
-    }
-
-    void LookShoot()
-    {
-        int spawn = 0;
-        for (int i = 0; i < 5; i++)
-        {
-            bulletSpawn[spawn].transform.LookAt(player);
             Instantiate(bullets[0], bulletSpawn[spawn]);
             spawn++;
         }
