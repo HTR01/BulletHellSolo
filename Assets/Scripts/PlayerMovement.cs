@@ -151,17 +151,19 @@ public class PlayerMovement : MonoBehaviour
         col.enabled = false;
         isDead = true;
         livesCount.text = "Lives: " + lives.ToString();
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(1.5f);
         transform.position = respawn.position;
         isDead = false;
         rend.enabled = true;
         col.enabled = true;
-        isInvulnerable = false;
+        hitbox.SetActive(true);
         Time.timeScale = 1;
         if(lives == 0)
         {
             gameOver = true;
         }
+        yield return new WaitForSeconds(0.5f);
+        isInvulnerable = false;
     }
 
     IEnumerator PartialInvulUp()
@@ -211,6 +213,7 @@ public class PlayerMovement : MonoBehaviour
         livesCount.text = "Lives: " + lives.ToString();
         endScreen.SetActive(false);
         gameOver = false;
+        hitbox.SetActive(true);
     }
 
     public void Continue()
