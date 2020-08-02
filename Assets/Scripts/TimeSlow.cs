@@ -22,7 +22,7 @@ public class TimeSlow : MonoBehaviour
                 NormalTime();
             }
         }
-        if(timeSlowed == true)
+        if (timeSlowed == true && PauseMenu.isPaused == false)
         {
             slowTimer -= 0.3f;
             if(slowTimer <= 0)

@@ -144,13 +144,21 @@ public class MobBehavior : MonoBehaviour
                 }
                 break;
             case 3:
-                if (transform.position == locations[2].position)
+                if (transform.position == locations[1].position)
                 {
-                    break;
+                    moveState = 1;
                 }
-                else
+                if (transform.position == locations[0].position)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, locations[2].position, speed * Time.deltaTime);
+                    moveState = 2;
+                }
+                if (moveState == 1)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, locations[0].position, speed * Time.deltaTime);
+                }
+                if (moveState == 2)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, locations[1].position, speed * Time.deltaTime);
                 }
                 break;
 
@@ -203,12 +211,12 @@ public class MobBehavior : MonoBehaviour
                 rotater[0].transform.Rotate(0.0f, 0.0f, 10.0f, Space.World);
                 break;
             case 2:
-                StartCoroutine(Pattern1());
-                rotater[0].transform.Rotate(0.0f, 0.0f, 10.0f, Space.World);
+                StartCoroutine(Pattern5());
+                rotater[0].transform.Rotate(0.0f, 0.0f, 3.0f, Space.World);
                 break;
             case 3:
                 StartCoroutine(Pattern3());
-                rotater[0].transform.Rotate(0.0f, 0.0f, 10.0f, Space.World);
+                rotater[0].transform.Rotate(0.0f, 0.0f, -10.0f, Space.World);
                 break;
             case 4:
                 rotater[0].transform.Rotate(0.0f, 0.0f, 30.0f, Space.World);
@@ -237,42 +245,10 @@ public class MobBehavior : MonoBehaviour
 
     // SHOOTING COROUTINES
 
-    IEnumerator Shoot1()
-    {
-        Instantiate(bullets[1], bulletSpawn[0]);
-        isShooting = true;
-        if (TimeSlow.timeSlowed == true)
-        {
-            yield return new WaitForSeconds(fireRate[0] * 2);
-        }
-        else
-        {
-            yield return new WaitForSeconds(fireRate[0]);
-        }
-        isShooting = false;
-
-    }
-
-    IEnumerator Shoot2()
-    {
-        Instantiate(bullets[1], bulletSpawn[0]);
-        isShooting = true;
-        if (TimeSlow.timeSlowed == true)
-        {
-            yield return new WaitForSeconds(fireRate[1] * 2);
-        }
-        else
-        {
-            yield return new WaitForSeconds(fireRate[1]);
-        }
-        isShooting = false;
-
-    }
-
     IEnumerator Pattern1()
     {
-        CircleShoot();
         isShooting = true;
+        CircleShoot();
         if (TimeSlow.timeSlowed == true)
         {
             yield return new WaitForSeconds(fireRate[2] * 2);
@@ -301,19 +277,19 @@ public class MobBehavior : MonoBehaviour
 
     IEnumerator Pattern3()
     {
+        isShooting = true;
         for (int i = 0; i < 1; i++)
         {
             CircleShoot();
             yield return new WaitForSeconds(0.1f);
         }
-        isShooting = true;
         if (TimeSlow.timeSlowed == true)
         {
-            yield return new WaitForSeconds(fireRate[1] * 2);
+            yield return new WaitForSeconds(fireRate[3] * 2);
         }
         else
         {
-            yield return new WaitForSeconds(fireRate[1]);
+            yield return new WaitForSeconds(fireRate[3]);
         }
         isShooting = false;
     }
@@ -333,6 +309,25 @@ public class MobBehavior : MonoBehaviour
         else
         {
             yield return new WaitForSeconds(fireRate[1]);
+        }
+        isShooting = false;
+    }
+
+    IEnumerator Pattern5()
+    {
+        isShooting = true;
+        for (int i = 0; i < 10; i++)
+        {
+            CircleShoot();
+            yield return new WaitForSeconds(0.1f);
+        }
+        if (TimeSlow.timeSlowed == true)
+        {
+            yield return new WaitForSeconds(fireRate[2] * 2);
+        }
+        else
+        {
+            yield return new WaitForSeconds(fireRate[2]);
         }
         isShooting = false;
     }
