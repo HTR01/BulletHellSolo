@@ -29,8 +29,13 @@ public class PlayerMovement : MonoBehaviour
     public GameObject hitbox;
     public Renderer rend;
     public Collider col;
-
     public Transform respawn;
+
+    [Header("Clamp Values")]
+    public Transform xMin;
+    public Transform xMax;
+    public Transform yMin;
+    public Transform yMax;
 
     void Start()
     {
@@ -79,6 +84,23 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X) && Input.GetKey(KeyCode.RightArrow) && TimeSlow.slowTimer >= 30)
         {
             StartCoroutine(PartialInvulRight());
+        }
+
+        if(transform.position.y > yMax.position.y)
+        {
+            transform.position = new Vector3(transform.position.x, yMax.position.y, transform.position.z);
+        }
+        if (transform.position.y < yMin.position.y)
+        {
+            transform.position = new Vector3(transform.position.x, yMin.position.y, transform.position.z);
+        }
+        if (transform.position.x < xMin.position.x)
+        {
+            transform.position = new Vector3(xMin.position.x, transform.position.y, transform.position.z);
+        }
+        if (transform.position.x > xMax.position.x)
+        {
+            transform.position = new Vector3(xMax.position.x, transform.position.y, transform.position.z);
         }
 
         switch (speedState)
