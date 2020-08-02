@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameAnalyticsSDK;
 
 public class MobBehavior : MonoBehaviour
 {
@@ -52,6 +53,7 @@ public class MobBehavior : MonoBehaviour
     void Start()
     {
         timeToGo = Time.fixedTime + addedTime;
+        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Stage 1");
     }
     void Update()
     {
@@ -109,6 +111,7 @@ public class MobBehavior : MonoBehaviour
         if (hp <= 0 && isDead == false)
         {
             StartCoroutine(Defeat());
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Stage 1");
         }
     }
 

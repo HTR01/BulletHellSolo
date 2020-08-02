@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GameAnalyticsSDK;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -113,10 +114,12 @@ public class PlayerMovement : MonoBehaviour
             if (lives >= 1)
             {
                 Respawn();
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Player Died");
             }
             if (lives == 0 && gameOver == true)
             {
                 EndGame();
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Game Over");
             }
         }
     }
