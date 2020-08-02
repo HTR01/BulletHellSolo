@@ -381,11 +381,11 @@ public class MobBehavior : MonoBehaviour
         SpawnBullet();
         if (TimeSlow.timeSlowed == true)
         {
-            yield return new WaitForSeconds(fireRate[3] * 2);
+            yield return new WaitForSeconds(fireRate[4] * 2);
         }
         else
         {
-            yield return new WaitForSeconds(fireRate[3]);
+            yield return new WaitForSeconds(fireRate[4]);
         }
         isShooting2 = false;
     }

@@ -2659,6 +2659,7 @@ MonoBehaviour:
   - 0.5
   - 0.3
   - 0.1
+  - 0.05
   locations:
   - {fileID: 593216776}
   - {fileID: 798547993}

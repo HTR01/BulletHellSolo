@@ -44,6 +44,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.L))
+        {
+            isInvulnerable = true;
+        }
+
         if (Input.GetKey(KeyCode.UpArrow))
         {
             transform.position += Vector3.up * speed * Time.deltaTime;
