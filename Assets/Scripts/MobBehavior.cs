@@ -246,7 +246,7 @@ public class MobBehavior : MonoBehaviour
                 }
                 rotater[2].transform.Rotate(0.0f, 0.0f, 2f, Space.World);
                 rotater[3].transform.Rotate(0.0f, 0.0f, -2f, Space.World);
-                rotater[4].transform.Rotate(0.0f, 0.0f, -15.0f, Space.World);
+                rotater[4].transform.Rotate(0.0f, 0.0f, -5.0f, Space.World);
                 break;
         }
     }
@@ -401,11 +401,11 @@ public class MobBehavior : MonoBehaviour
         InverseCircleShoot();
         if (TimeSlow.timeSlowed == true)
         {
-            yield return new WaitForSeconds(fireRate[3] * 2);
+            yield return new WaitForSeconds(fireRate[2] * 2);
         }
         else
         {
-            yield return new WaitForSeconds(fireRate[3]);
+            yield return new WaitForSeconds(fireRate[2]);
         }
         isShooting3 = false;
     }
