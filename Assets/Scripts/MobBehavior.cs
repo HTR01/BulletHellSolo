@@ -43,6 +43,7 @@ public class MobBehavior : MonoBehaviour
     bool isDead = false;
     public static bool isRotation = false;
     bool isShooting2 = false;
+    bool isShooting3 = false;
 
     // SWITCH STATEMENT VALUES
 
@@ -239,8 +240,13 @@ public class MobBehavior : MonoBehaviour
                 {
                     StartCoroutine(Pattern6());
                 }
+                if(isShooting3 == false)
+                {
+                    StartCoroutine(Pattern7());
+                }
                 rotater[2].transform.Rotate(0.0f, 0.0f, 2f, Space.World);
                 rotater[3].transform.Rotate(0.0f, 0.0f, -2f, Space.World);
+                rotater[4].transform.Rotate(0.0f, 0.0f, -15.0f, Space.World);
                 break;
         }
     }
@@ -389,11 +395,34 @@ public class MobBehavior : MonoBehaviour
         }
         isShooting2 = false;
     }
+    IEnumerator Pattern7()
+    {
+        isShooting3 = true;
+        InverseCircleShoot();
+        if (TimeSlow.timeSlowed == true)
+        {
+            yield return new WaitForSeconds(fireRate[3] * 2);
+        }
+        else
+        {
+            yield return new WaitForSeconds(fireRate[3]);
+        }
+        isShooting3 = false;
+    }
 
     void CircleShoot()
     {
         int spawn = 0; 
         for (int i = 0; i < 16; i++)
+        {
+            Instantiate(bullets[0], bulletSpawn[spawn]);
+            spawn++;
+        }
+    }
+    void InverseCircleShoot()
+    {
+        int spawn = 23;
+        for (int i = 23; i < 38; i++)
         {
             Instantiate(bullets[0], bulletSpawn[spawn]);
             spawn++;
