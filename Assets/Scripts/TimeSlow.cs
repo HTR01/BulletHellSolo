@@ -17,12 +17,12 @@ public class TimeSlow : MonoBehaviour
             {
                 SlowTime();
             }
-            else if(PauseMenu.isPaused == false)
+            else if(PauseMenu.isPaused == false && PlayerMovement.isDead == false)
             {
                 NormalTime();
             }
         }
-        if (timeSlowed == true && PauseMenu.isPaused == false)
+        if (timeSlowed == true && PauseMenu.isPaused == false && PlayerMovement.isDead == false)
         {
             slowTimer -= 0.3f;
             if(slowTimer <= 0)
@@ -30,7 +30,7 @@ public class TimeSlow : MonoBehaviour
                 NormalTime();
             }
         }
-        else if(slowTimer < 100 && PauseMenu.isPaused == false)
+        else if(slowTimer < 100 && PauseMenu.isPaused == false && PlayerMovement.isDead == false)
         {
             slowTimer += 0.3f;
         }

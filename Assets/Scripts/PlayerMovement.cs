@@ -161,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
         rend.enabled = false;
         hitbox.SetActive(false);
         Time.timeScale = 0;
+        isDead = true;
         if (continues > 0)
         {
             endScreen.SetActive(true);
