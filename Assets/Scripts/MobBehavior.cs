@@ -41,6 +41,7 @@ public class MobBehavior : MonoBehaviour
     public bool isShooting = false;
     bool isDead = false;
     public static bool isRotation = false;
+    bool isShooting2 = false;
 
     // SWITCH STATEMENT VALUES
 
@@ -68,8 +69,12 @@ public class MobBehavior : MonoBehaviour
         if (isShooting == false)
         {
             Shooting();
+        } 
+        
+        if (Input.GetKey(KeyCode.K))
+        {
+            hp = 49;
         }
-        //transform.LookAt(player.transform);
 
         Movement();
     }
@@ -198,6 +203,12 @@ public class MobBehavior : MonoBehaviour
                 {
                     transform.position = Vector3.MoveTowards(transform.position, locations[1].position, speed * Time.deltaTime);
                 }
+                if (isShooting2 == false)
+                {
+                    StartCoroutine(Pattern6());
+                }
+                rotater[2].transform.Rotate(0.0f, 0.0f, 2f, Space.World);
+                rotater[3].transform.Rotate(0.0f, 0.0f, -2f, Space.World);
                 break;
         }
     }
@@ -224,7 +235,7 @@ public class MobBehavior : MonoBehaviour
                 break;
             case 5:
                 StartCoroutine(Pattern4());
-                rotater[0].transform.Rotate(0.0f, 0.0f, 27f, Space.World);
+                rotater[0].transform.Rotate(0.0f, 0.0f, 7.0f, Space.World);
                 break;
         }
     }
@@ -332,6 +343,21 @@ public class MobBehavior : MonoBehaviour
         isShooting = false;
     }
 
+    IEnumerator Pattern6()
+    {
+        isShooting2 = true;
+        SpawnBullet();
+        if (TimeSlow.timeSlowed == true)
+        {
+            yield return new WaitForSeconds(fireRate[3] * 2);
+        }
+        else
+        {
+            yield return new WaitForSeconds(fireRate[3]);
+        }
+        isShooting2 = false;
+    }
+
     void CircleShoot()
     {
         int spawn = 0; 
@@ -340,5 +366,11 @@ public class MobBehavior : MonoBehaviour
             Instantiate(bullets[0], bulletSpawn[spawn]);
             spawn++;
         }
+    }
+
+    void SpawnBullet()
+    {
+        Instantiate(bullets[0], bulletSpawn[21]);
+        Instantiate(bullets[0], bulletSpawn[22]);
     }
 }
