@@ -50,6 +50,10 @@ public class MobBehavior : MonoBehaviour
     int hpSwitch = 1;
     int moveState = 1;
 
+    //ANALYTIC BOOLS
+
+    bool state1 = false, state2 = false, state3 = false, state4 = false;
+
     void Start()
     {
         timeToGo = Time.fixedTime + addedTime;
@@ -91,26 +95,51 @@ public class MobBehavior : MonoBehaviour
         {
             hpSwitch = 2;
             enemyState = 2;
+            if(state1 == false)
+            {
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "State 1");
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "State 2");
+                state1 = true;
+            }
         }
         if(hp <= 150)
         {
             hpSwitch = 3;
             enemyState = 3;
+            if (state2 == false)
+            {
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "State 2");
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "State 3");
+                state2 = true;
+            }
         }
         if(hp <= 100)
         {
             hpSwitch = 4;
             enemyState = 4;
+            if (state3 == false)
+            {
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "State 3");
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "State 4");
+                state3 = true;
+            }
         }
         if (hp <= 50)
         {
             hpSwitch = 5;
             enemyState = 5;
+            if (state4 == false)
+            {
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "State 4");
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "State 5");
+                state4 = true;
+            }
         }
 
         if (hp <= 0 && isDead == false)
         {
             StartCoroutine(Defeat());
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "State 5");
             GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Stage 1");
         }
     }
