@@ -26,8 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Player")]
     public GameObject player;
-    public GameObject hitbox;
-    public Renderer rend;
+    public GameObject sprite;
     public Collider col;
     public Transform respawn;
 
@@ -158,10 +157,9 @@ public class PlayerMovement : MonoBehaviour
 
     void EndGame()
     {
-        rend.enabled = false;
-        hitbox.SetActive(false);
         Time.timeScale = 0;
         isDead = true;
+        sprite.SetActive(false);
         if (continues > 0)
         {
             endScreen.SetActive(true);
@@ -176,18 +174,16 @@ public class PlayerMovement : MonoBehaviour
     {
         lives--;
         isInvulnerable = true;
-        hitbox.SetActive(false);
+        sprite.SetActive(false);
         Time.timeScale = 0.5f;
-        rend.enabled = false;
         col.enabled = false;
         isDead = true;
         livesCount.text = "Lives: " + lives.ToString();
         yield return new WaitForSecondsRealtime(1.5f);
         transform.position = respawn.position;
         isDead = false;
-        rend.enabled = true;
         col.enabled = true;
-        hitbox.SetActive(true);
+        sprite.SetActive(true);
         Time.timeScale = 1;
         if(lives == 0)
         {
@@ -234,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
     {
         lives = 3;
         Score.score = 0;
-        rend.enabled = true;
+        sprite.SetActive(true);
         col.enabled = true;
         transform.position = respawn.position;
         isDead = false;
@@ -244,7 +240,6 @@ public class PlayerMovement : MonoBehaviour
         livesCount.text = "Lives: " + lives.ToString();
         endScreen.SetActive(false);
         gameOver = false;
-        hitbox.SetActive(true);
     }
 
     public void Continue()
