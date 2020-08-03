@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && PlayerMovement.isDead == false)
         {
             if (isPaused == true)
             {
