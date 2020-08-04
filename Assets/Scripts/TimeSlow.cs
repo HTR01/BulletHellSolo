@@ -32,7 +32,7 @@ public class TimeSlow : MonoBehaviour
         }
         else if(slowTimer < 100 && PauseMenu.isPaused == false && PlayerMovement.isDead == false)
         {
-            slowTimer += 0.3f;
+            slowTimer += 0.15f;
         }
         if(PlayerMovement.isDead == true)
         {
