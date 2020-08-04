@@ -100,7 +100,6 @@ public class MobBehavior : MonoBehaviour
             enemyState = 2;
             if(state1 == false)
             {
-                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "State 1");
                 GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "State 2");
                 state1 = true;
             }
@@ -111,7 +110,6 @@ public class MobBehavior : MonoBehaviour
             enemyState = 3;
             if (state2 == false)
             {
-                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "State 2");
                 GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "State 3");
                 state2 = true;
             }
@@ -122,7 +120,6 @@ public class MobBehavior : MonoBehaviour
             enemyState = 4;
             if (state3 == false)
             {
-                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "State 3");
                 GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "State 4");
                 state3 = true;
             }
@@ -133,7 +130,6 @@ public class MobBehavior : MonoBehaviour
             enemyState = 5;
             if (state4 == false)
             {
-                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "State 4");
                 GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "State 5");
                 state4 = true;
             }
@@ -142,7 +138,6 @@ public class MobBehavior : MonoBehaviour
         if (hp <= 0 && isDead == false)
         {
             StartCoroutine(Defeat());
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "State 5");
             GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Stage 1");
         }
     }
