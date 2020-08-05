@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (PlayerMovement.isDead == false)
+        if (PlayerMovement.isDead == false && Time.timeScale != 0)
         {
             if (TimeSlow.timeSlowed == false)
             {
