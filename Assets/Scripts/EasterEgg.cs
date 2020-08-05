@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameAnalyticsSDK;
 
 public class EasterEgg : MonoBehaviour
 {
     bool isEnabled;
     public GameObject eventSys;
     public GameObject player;
+
+    bool easterEggFound = false;
 
     
     void Update()
@@ -30,6 +33,11 @@ public class EasterEgg : MonoBehaviour
         player.GetComponent<Shooting>().enabled = true;
         eventSys.SetActive(false);
         isEnabled = true;
+        if(easterEggFound == false)
+        {
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Easter Egg!");
+            easterEggFound = true;
+        }
     }
 
     public void Deactivate()
