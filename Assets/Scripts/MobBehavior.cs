@@ -78,13 +78,7 @@ public class MobBehavior : MonoBehaviour
         if (isShooting == false)
         {
             Shooting();
-        } 
-        
-        if (Input.GetKey(KeyCode.K))
-        {
-            hp = 49;
         }
-
         Movement();
     }
 
