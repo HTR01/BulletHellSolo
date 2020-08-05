@@ -13,6 +13,10 @@ public class TitleScreen : MonoBehaviour
     public static bool lightsOn;
     public Toggle lightCheck;
 
+    private void Start()
+    {
+        Time.timeScale = 1;
+    }
     public void PlayGame()
     {
         Time.timeScale = 1;
