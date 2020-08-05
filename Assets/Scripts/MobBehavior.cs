@@ -93,6 +93,7 @@ public class MobBehavior : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet"))
         {
             hp -= damage;
+            Score.score = Score.score + 100;
         }
         if (hp <= 200)
         {
@@ -286,7 +287,7 @@ public class MobBehavior : MonoBehaviour
             Instantiate(powerPickup, bulletSpawn[0]);
         }
         isDead = true;
-        Score.score = Score.score + 500;
+        Score.score = Score.score + 5000000;
         yield return new WaitForSeconds(0.01f);
         Destroy(this.gameObject);
     }

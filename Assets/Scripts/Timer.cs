@@ -9,8 +9,24 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        float timerCon = Mathf.Round(Time.time * 100);
-        timerCon = timerCon / 100;
-        timer.text = "Time: " + timerCon.ToString();
+        if (PlayerMovement.isDead == false)
+        {
+            if (TimeSlow.timeSlowed == false)
+            {
+                float timerCon = Mathf.Round(Time.time * 100);
+                timerCon = timerCon / 100;
+                timer.text = "Time: " + timerCon.ToString();
+                int timerScore = Mathf.RoundToInt(timerCon / 10);
+                Score.score = Score.score + timerScore;
+            }
+            if (TimeSlow.timeSlowed == true)
+            {
+                float timerCon = Mathf.Round(Time.time * 200);
+                timerCon = timerCon / 200;
+                timer.text = "Time: " + timerCon.ToString();
+                int timerScore = Mathf.RoundToInt(timerCon / 20);
+                Score.score = Score.score + timerScore;
+            }
+        }
     }
 }
