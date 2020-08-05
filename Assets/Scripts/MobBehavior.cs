@@ -276,10 +276,10 @@ public class MobBehavior : MonoBehaviour
 
     IEnumerator Defeat()
     {
-        for (int i = 0; i < Random.Range(3, 7); i++)
+        /*for (int i = 0; i < Random.Range(3, 7); i++)
         {
             Instantiate(powerPickup, bulletSpawn[0]);
-        }
+        }*/
         isDead = true;
         Score.score = Score.score + 5000000;
         yield return new WaitForSeconds(0.01f);

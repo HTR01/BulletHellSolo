@@ -21,14 +21,6 @@ public class Shooting : MonoBehaviour
                 Power();
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            powerLevel = 2;
-        }if (Input.GetKeyDown(KeyCode.N))
-        {
-            powerLevel = 1;
-        }
     }
 
     void Power()
