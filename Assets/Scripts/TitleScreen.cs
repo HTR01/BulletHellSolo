@@ -16,6 +16,7 @@ public class TitleScreen : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+        PauseMenu.isPaused = false;
     }
     public void PlayGame()
     {
