@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject endScreenN;
     bool isInvulnerable = false;
 
+    public GameObject endSystem;
+    public GameObject endNoConSys;
+
     [Header("Player")]
     public GameObject player;
     public GameObject sprite;
@@ -163,10 +166,12 @@ public class PlayerMovement : MonoBehaviour
         if (continues > 0)
         {
             endScreen.SetActive(true);
+            endSystem.SetActive(true);
         }
         else
         {
             endScreenN.SetActive(true);
+            endNoConSys.SetActive(true);
         }
     }
 
@@ -239,6 +244,9 @@ public class PlayerMovement : MonoBehaviour
         continues--;
         livesCount.text = "Lives: " + lives.ToString();
         endScreen.SetActive(false);
+        endSystem.SetActive(false);
+        endNoConSys.SetActive(false);
+
         gameOver = false;
     }
 
