@@ -8,6 +8,20 @@ public class BulletBehavior : MonoBehaviour
     public float baseSpeed = 15;
     public float timeSpeed = 30;
 
+    public Light glowLight;
+
+    private void Start()
+    {
+        if(TitleScreen.lightsOn == true)
+        {
+            glowLight.enabled = true;
+        }
+        else
+        {
+            glowLight.enabled = false;
+        }
+    }
+
     void Update()
     {
         transform.position += Vector3.up * speed * Time.deltaTime;

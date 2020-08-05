@@ -168,6 +168,7 @@ MonoBehaviour:
   speed: 10
   baseSpeed: 10
   timeSpeed: 5
+  glowLight: {fileID: 2191899989767957008}
 --- !u!108 &2191899989767957008
 Light:
   m_ObjectHideFlags: 0

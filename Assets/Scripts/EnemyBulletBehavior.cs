@@ -8,16 +8,24 @@ public class EnemyBulletBehavior : MonoBehaviour
     public float baseSpeed = 10;
     public float timeSpeed = 5f;
 
+    public Light glowLight;
+
     Transform playerPos;
     GameObject player;
 
     private void Start()
     {
         player = GameObject.Find("Player");
-        //playerPos = player.transform;
         playerPos = player.GetComponent<Transform>();
 
-        //transform.LookAt(player.transform);
+        if (TitleScreen.lightsOn == true)
+        {
+            glowLight.enabled = true;
+        }
+        else
+        {
+            glowLight.enabled = false;
+        }
     }
 
     void Update()
