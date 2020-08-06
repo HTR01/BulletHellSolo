@@ -9,6 +9,7 @@ public class MobBehavior : MonoBehaviour
     [Header("Health Settings")]
     public float hp;
     public float damage;
+    public GameObject winScreen;
 
     // SPEED RELATED
     [Header("Speed Settings")]
@@ -46,6 +47,7 @@ public class MobBehavior : MonoBehaviour
     public static bool isRotation = false;
     bool isShooting2 = false;
     bool isShooting3 = false;
+    public static bool endless = false;
 
     // SWITCH STATEMENT VALUES
 
@@ -59,6 +61,7 @@ public class MobBehavior : MonoBehaviour
 
     void Start()
     {
+        isDead = false;
         timeToGo = Time.fixedTime + addedTime;
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "Stage 1");
     }
@@ -190,6 +193,11 @@ public class MobBehavior : MonoBehaviour
                 {
                     transform.position = Vector3.MoveTowards(transform.position, locations[1].position, speed * Time.deltaTime);
                 }
+                if (isShooting2 == false)
+                {
+                    StartCoroutine(Pattern3Reverse());
+                }
+                rotater[4].transform.Rotate(0.0f, 0.0f, 10.0f, Space.World);
                 break;
 
             case 4:
@@ -276,13 +284,12 @@ public class MobBehavior : MonoBehaviour
 
     IEnumerator Defeat()
     {
-        /*for (int i = 0; i < Random.Range(3, 7); i++)
-        {
-            Instantiate(powerPickup, bulletSpawn[0]);
-        }*/
         isDead = true;
         Score.score = Score.score + 5000000;
+        endless = true;
+        winScreen.SetActive(true);
         yield return new WaitForSeconds(0.01f);
+        Time.timeScale = 0;
         Destroy(this.gameObject);
     }
 
@@ -336,6 +343,25 @@ public class MobBehavior : MonoBehaviour
         }
         isShooting = false;
     }
+    IEnumerator Pattern3Reverse()
+    {
+        isShooting2 = true;
+        for (int i = 0; i < 1; i++)
+        {
+            CircleShoot();
+            yield return new WaitForSeconds(0.1f);
+        }
+        if (TimeSlow.timeSlowed == true)
+        {
+            yield return new WaitForSeconds(fireRate[3] * 2);
+        }
+        else
+        {
+            yield return new WaitForSeconds(fireRate[3]);
+        }
+        isShooting2 = false;
+    }
+
     IEnumerator Pattern4()
     {
         isShooting = true;
