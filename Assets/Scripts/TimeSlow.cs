@@ -9,6 +9,11 @@ public class TimeSlow : MonoBehaviour
     public static float slowTimer = 100;
     public Image cooldown;
 
+    private void Start()
+    {
+        slowTimer = 100;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
