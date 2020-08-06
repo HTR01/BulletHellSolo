@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GameAnalyticsSDK;
+using System.IO;
 
 public class MobBehavior : MonoBehaviour
 {
@@ -47,7 +48,6 @@ public class MobBehavior : MonoBehaviour
     public static bool isRotation = false;
     bool isShooting2 = false;
     bool isShooting3 = false;
-    public static bool endless = false;
 
     // SWITCH STATEMENT VALUES
 
@@ -135,8 +135,17 @@ public class MobBehavior : MonoBehaviour
 
         if (hp <= 0 && isDead == false)
         {
-            StartCoroutine(Defeat());
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Stage 1");
+            if (TitleScreen.isEndless == true)
+            {
+                hp = 250;
+                hpSwitch = 1;
+                enemyState = 1;
+            }
+            else
+            {
+                StartCoroutine(Defeat());
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Stage 1");
+            }
         }
     }
 
@@ -164,6 +173,8 @@ public class MobBehavior : MonoBehaviour
                 {
                     transform.position = Vector3.MoveTowards(transform.position, locations[1].position, speed * Time.deltaTime);
                 }
+                leftTurret.SetActive(false);
+                rightTurret.SetActive(false);
                 break;
 
             case 2:
@@ -284,9 +295,15 @@ public class MobBehavior : MonoBehaviour
 
     IEnumerator Defeat()
     {
+        if (!File.Exists(Application.dataPath + "/endlessConfirm.txt"))
+        {
+            using (StreamWriter sw = File.CreateText(Application.dataPath + "/endlessConfirm.txt"))
+            {
+                sw.WriteLine("Endless Confirmed");
+            }
+        }
         isDead = true;
         Score.score = Score.score + 5000000;
-        endless = true;
         winScreen.SetActive(true);
         yield return new WaitForSeconds(0.01f);
         Time.timeScale = 0;

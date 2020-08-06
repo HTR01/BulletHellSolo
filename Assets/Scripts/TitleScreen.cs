@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.IO;
 
 public class TitleScreen : MonoBehaviour
 {
@@ -10,16 +11,31 @@ public class TitleScreen : MonoBehaviour
     public GameObject ControlsCanvas;
     public GameObject SettingsCanvas;
 
+    public GameObject EndlessButton;
+
     public static bool lightsOn;
+    public static bool isEndless = false;
     public Toggle lightCheck;
 
     private void Start()
     {
         Time.timeScale = 1;
         PauseMenu.isPaused = false;
+        if (File.Exists(Application.dataPath + "/endlessConfirm.txt"))
+        {
+            EndlessButton.SetActive(true);
+        }
+
     }
     public void PlayGame()
     {
+        isEndless = false;
+        Time.timeScale = 1;
+        SceneManager.LoadScene(1);
+    }
+    public void PlayEndless()
+    {
+        isEndless = true;
         Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
