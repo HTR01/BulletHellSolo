@@ -170,6 +170,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    IEnumerator RespawnFlash()
+    {
+        sprite.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        sprite.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        sprite.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        sprite.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        sprite.SetActive(true);
+    }
+
     IEnumerator WaitSeconds()
     {
         lives--;
@@ -183,8 +196,8 @@ public class PlayerMovement : MonoBehaviour
         transform.position = respawn.position;
         isDead = false;
         col.enabled = true;
-        sprite.SetActive(true);
         Time.timeScale = 1;
+        StartCoroutine(RespawnFlash());
         if(lives == 0)
         {
             gameOver = true;
