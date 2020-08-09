@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
         {
             if (TimeSlow.timeSlowed == false)
             {
-                float timerCon = Mathf.Round(Time.time * 100);
+                float timerCon = Mathf.Round(Time.timeSinceLevelLoad * 100);
                 timerCon = timerCon / 100;
                 timer.text = "Time: " + timerCon.ToString();
                 int timerScore = Mathf.RoundToInt(timerCon / 10);
@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour
             }
             if (TimeSlow.timeSlowed == true)
             {
-                float timerCon = Mathf.Round(Time.time * 200);
+                float timerCon = Mathf.Round(Time.timeSinceLevelLoad * 200);
                 timerCon = timerCon / 200;
                 timer.text = "Time: " + timerCon.ToString();
                 int timerScore = Mathf.RoundToInt(timerCon / 20);
