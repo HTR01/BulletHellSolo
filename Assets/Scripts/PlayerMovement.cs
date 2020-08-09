@@ -216,7 +216,9 @@ public class PlayerMovement : MonoBehaviour
         isInvulnerable = true;
         transform.position += Vector3.up * dash;
         TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
+        sprite.SetActive(false);
         yield return new WaitForSeconds(0.3f);
+        sprite.SetActive(true);
         isInvulnerable = false;
     }
     IEnumerator PartialInvulDown()
@@ -224,7 +226,9 @@ public class PlayerMovement : MonoBehaviour
         isInvulnerable = true;
         transform.position += Vector3.down * dash;
         TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
+        sprite.SetActive(false);
         yield return new WaitForSeconds(0.3f);
+        sprite.SetActive(true);
         isInvulnerable = false;
     }
     IEnumerator PartialInvulLeft()
@@ -232,7 +236,9 @@ public class PlayerMovement : MonoBehaviour
         isInvulnerable = true;
         transform.position += Vector3.left * dash;
         TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
+        sprite.SetActive(false);
         yield return new WaitForSeconds(0.3f);
+        sprite.SetActive(true);
         isInvulnerable = false;
     }
     IEnumerator PartialInvulRight()
@@ -240,7 +246,10 @@ public class PlayerMovement : MonoBehaviour
         isInvulnerable = true;
         transform.position += Vector3.right * dash;
         TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
-        yield return new WaitForSeconds(0.3f);
+        sprite.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        sprite.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
         isInvulnerable = false;
     }
 
