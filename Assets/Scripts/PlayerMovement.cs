@@ -167,6 +167,11 @@ public class PlayerMovement : MonoBehaviour
         {
             endScreenN.SetActive(true);
             endNoConSys.SetActive(true);
+            //GameAnalytics Send Score
+            if (TitleScreen.isEndless == true)
+            {
+                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Endless", Score.score);
+            }
         }
     }
 
@@ -242,7 +247,10 @@ public class PlayerMovement : MonoBehaviour
     void ResetGame()
     {
         lives = 3;
-        Score.score = 0;
+        if (TitleScreen.isEndless == false)
+        {
+            Score.score = 0;
+        }
         sprite.SetActive(true);
         col.enabled = true;
         transform.position = respawn.position;
