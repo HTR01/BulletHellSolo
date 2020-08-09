@@ -726,9 +726,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cddce7b5dc655df4697aa23a8da6052c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
-  baseSpeed: 40
-  timeSpeed: 80
+  speed: 70
+  baseSpeed: 70
+  timeSpeed: 140
   glowLight: {fileID: 2173016985073185657}
 --- !u!54 &-8611174439178587222
 Rigidbody:
