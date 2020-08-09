@@ -16,6 +16,7 @@ public class TitleScreen : MonoBehaviour
     public static bool lightsOn;
     public static bool isEndless = false;
     public Toggle lightCheck;
+    public Text highScore;
 
     private void Start()
     {
@@ -25,6 +26,10 @@ public class TitleScreen : MonoBehaviour
         {
             EndlessButton.SetActive(true);
         }
+        if (File.Exists(Application.dataPath + "/highScore.txt"))
+        {
+            ReadString();
+        }
 
     }
     public void PlayGame()
@@ -32,12 +37,14 @@ public class TitleScreen : MonoBehaviour
         isEndless = false;
         Time.timeScale = 1;
         SceneManager.LoadScene(1);
+        Score.score = 0;
     }
     public void PlayEndless()
     {
         isEndless = true;
         Time.timeScale = 1;
         SceneManager.LoadScene(1);
+        Score.score = 0;
     }
 
     public void QuitGame()
@@ -79,5 +86,22 @@ public class TitleScreen : MonoBehaviour
         {
             lightsOn = false;
         }
+    }
+    void ReadString()
+    {
+        string path = Application.dataPath + "/highScore.txt";
+        string ln;
+
+        StreamReader reader = new StreamReader(path);
+
+        using (StreamReader file = new StreamReader(path))
+        {
+            ln = file.ReadLine();
+            highScore.text = "High Score: " + ln.ToString();
+        }
+
+
+
+        reader.Close();
     }
 }

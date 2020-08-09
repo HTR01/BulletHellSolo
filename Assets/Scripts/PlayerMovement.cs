@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameAnalyticsSDK;
+using System.IO;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform xMax;
     public Transform yMin;
     public Transform yMax;
+
+    string ln;
 
     void Start()
     {
@@ -152,7 +155,18 @@ public class PlayerMovement : MonoBehaviour
     {
         StartCoroutine(WaitSeconds());
     }
+    void ReadString()
+    {
+        string path = Application.dataPath + "/highScore.txt";
 
+        StreamReader reader = new StreamReader(path);
+
+        using (StreamReader file = new StreamReader(path))
+        {
+            ln = file.ReadLine();
+        }
+        reader.Close();
+    }
     void EndGame()
     {
         Time.timeScale = 0;
@@ -171,9 +185,19 @@ public class PlayerMovement : MonoBehaviour
             if (TitleScreen.isEndless == true)
             {
                 GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Endless", Score.score);
+                ReadString();
+                int lnNum = int.Parse(ln.ToString());
+                if (Score.score > lnNum)
+                {
+                    using (StreamWriter sw = File.CreateText(Application.dataPath + "/highScore.txt"))
+                    {
+                        sw.WriteLine(Score.score);
+                    }
+                }
             }
         }
     }
+   
 
     IEnumerator RespawnFlash()
     {
@@ -217,8 +241,9 @@ public class PlayerMovement : MonoBehaviour
         transform.position += Vector3.up * dash;
         TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
         sprite.SetActive(false);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         sprite.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
         isInvulnerable = false;
     }
     IEnumerator PartialInvulDown()
@@ -227,8 +252,9 @@ public class PlayerMovement : MonoBehaviour
         transform.position += Vector3.down * dash;
         TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
         sprite.SetActive(false);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         sprite.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
         isInvulnerable = false;
     }
     IEnumerator PartialInvulLeft()
@@ -237,8 +263,9 @@ public class PlayerMovement : MonoBehaviour
         transform.position += Vector3.left * dash;
         TimeSlow.slowTimer = TimeSlow.slowTimer - 30;
         sprite.SetActive(false);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         sprite.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
         isInvulnerable = false;
     }
     IEnumerator PartialInvulRight()
