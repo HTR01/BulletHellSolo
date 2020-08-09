@@ -297,6 +297,7 @@ public class MobBehavior : MonoBehaviour
     {
         if (!File.Exists(Application.dataPath + "/endlessConfirm.txt"))
         {
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Endless Unlocked");
             using (StreamWriter sw = File.CreateText(Application.dataPath + "/endlessConfirm.txt"))
             {
                 sw.WriteLine("Endless Confirmed");
