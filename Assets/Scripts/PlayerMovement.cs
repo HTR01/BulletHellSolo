@@ -185,13 +185,23 @@ public class PlayerMovement : MonoBehaviour
             if (TitleScreen.isEndless == true)
             {
                 GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Endless", Score.score);
-                ReadString();
-                int lnNum = int.Parse(ln.ToString());
-                if (Score.score > lnNum)
+                if (!File.Exists(Application.dataPath + "/highScore.txt"))
                 {
                     using (StreamWriter sw = File.CreateText(Application.dataPath + "/highScore.txt"))
                     {
                         sw.WriteLine(Score.score);
+                    }
+                }
+                else
+                {
+                    ReadString();
+                    int lnNum = int.Parse(ln.ToString());
+                    if (Score.score > lnNum)
+                    {
+                        using (StreamWriter sw = File.CreateText(Application.dataPath + "/highScore.txt"))
+                        {
+                            sw.WriteLine(Score.score);
+                        }
                     }
                 }
             }
