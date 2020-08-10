@@ -16,7 +16,6 @@ public class TurretHP : MonoBehaviour
             hp -= damage;
             if(hp <= 0)
             {
-                Destroy(turret);
             }
         }
     }

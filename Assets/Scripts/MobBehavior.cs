@@ -255,9 +255,13 @@ public class MobBehavior : MonoBehaviour
                 {
                     StartCoroutine(Pattern7());
                 }
-                rotater[2].transform.Rotate(0.0f, 0.0f, 2f, Space.World);
-                rotater[3].transform.Rotate(0.0f, 0.0f, -2f, Space.World);
-                rotater[4].transform.Rotate(0.0f, 0.0f, -5.0f, Space.World);
+
+                if(Time.timeScale != 0)
+                {
+                    rotater[2].transform.Rotate(0.0f, 0.0f, 2f, Space.World);
+                    rotater[3].transform.Rotate(0.0f, 0.0f, -2f, Space.World);
+                    rotater[4].transform.Rotate(0.0f, 0.0f, -5.0f, Space.World);
+                }
                 leftTurret.SetActive(true);
                 rightTurret.SetActive(true);
                 break;
