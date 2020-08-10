@@ -39,6 +39,7 @@ public class TitleScreen : MonoBehaviour
         SceneManager.LoadScene(1);
         Score.score = 0;
         PlayerMovement.isDead = false;
+        MobBehavior.isWin = false;
     }
     public void PlayEndless()
     {
@@ -47,6 +48,7 @@ public class TitleScreen : MonoBehaviour
         SceneManager.LoadScene(1);
         Score.score = 0;
         PlayerMovement.isDead = false;
+        MobBehavior.isWin = false;
     }
 
     public void QuitGame()

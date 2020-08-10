@@ -18,7 +18,7 @@ public class TimeSlow : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (timeSlowed == false && PlayerMovement.isDead == false && PauseMenu.isPaused == false)
+            if (timeSlowed == false && PlayerMovement.isDead == false && PauseMenu.isPaused == false && MobBehavior.isWin == false)
             {
                 SlowTime();
             }
@@ -27,7 +27,7 @@ public class TimeSlow : MonoBehaviour
                 NormalTime();
             }
         }
-        if (timeSlowed == true && PauseMenu.isPaused == false && PlayerMovement.isDead == false)
+        if (timeSlowed == true && PauseMenu.isPaused == false && PlayerMovement.isDead == false && MobBehavior.isWin == false)
         {
             slowTimer -= 0.3f;
             if(slowTimer <= 0)
@@ -35,7 +35,7 @@ public class TimeSlow : MonoBehaviour
                 NormalTime();
             }
         }
-        else if(slowTimer < 100 && PauseMenu.isPaused == false && PlayerMovement.isDead == false)
+        else if(slowTimer < 100 && PauseMenu.isPaused == false && PlayerMovement.isDead == false && MobBehavior.isWin == false)
         {
             slowTimer += 0.2f;
         }

@@ -48,6 +48,7 @@ public class MobBehavior : MonoBehaviour
     public static bool isRotation = false;
     bool isShooting2 = false;
     bool isShooting3 = false;
+    public static bool isWin = false;
 
     // SWITCH STATEMENT VALUES
 
@@ -143,6 +144,7 @@ public class MobBehavior : MonoBehaviour
             }
             else
             {
+                StopAllCoroutines();
                 StartCoroutine(Defeat());
                 GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "Stage 1");
             }
@@ -308,6 +310,7 @@ public class MobBehavior : MonoBehaviour
             }
         }
         isDead = true;
+        isWin = true;
         Score.score = Score.score + 5000000;
         winScreen.SetActive(true);
         yield return new WaitForSeconds(0.01f);
