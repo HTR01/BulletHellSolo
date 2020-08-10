@@ -101,7 +101,7 @@ public class TitleScreen : MonoBehaviour
         using (StreamReader file = new StreamReader(path))
         {
             ln = file.ReadLine();
-            highScore.text = "High Score: " + ln.ToString();
+            highScore.text = "Endless High Score: " + ln.ToString();
         }
 
 
